@@ -33,7 +33,7 @@ export class LoggerMiddleware implements NestMiddleware {
       const contentLength = res.get('content-length');
       const dif = process.hrtime(startAt);
       const responseTime = dif[0] * 1e3 + dif[1] * 1e-6;
-      this.logger.log(`
+      this.logger.log(`q
         ${method} ${baseUrl} ${statusCode} ${contentLength} 
         ${responseTime.toFixed(3)}ms
         ${userAgent} ${ip}
