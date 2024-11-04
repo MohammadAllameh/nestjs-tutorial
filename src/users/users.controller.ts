@@ -5,7 +5,7 @@ import { UsersService } from './users.service';
 export class UsersController {
     constructor(private readonly usersService: UsersService) { }
     @Get()
-    findAllUser() {
-        this.usersService.findAll();
+    async findAllUser() {
+        return await this.usersService.findAll();
     }
 }
