@@ -6,6 +6,7 @@ import { ProductsModule } from './products/products.module';
 import { LoggerMiddleware } from './logger/logger.middleware';
 import { AiModule } from './ai/ai.module';
 import { TypeOrmModule } from "@nestjs/typeorm"
+import { AuthModule } from './auth/auth.module';
 import UsersEntity from './entities/user.entity';
 
 @Module({
@@ -15,13 +16,13 @@ import UsersEntity from './entities/user.entity';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '',
+      password: 'MohammadPostgresql2009$',
       database: 'nestjs-tutorial',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
     TypeOrmModule.forFeature([UsersEntity])
-    , UsersModule, ProductsModule, AiModule,
+    , UsersModule, ProductsModule, AiModule, AuthModule,
   ],
   exports: [TypeOrmModule.forFeature([UsersEntity])],
   controllers: [AppController],
