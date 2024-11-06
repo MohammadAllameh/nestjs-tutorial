@@ -6,6 +6,8 @@ import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcrypt';
 const saltOrRounds = 10;
 
+
+// in register
 @Injectable()
 export class AuthService {
   constructor(
