@@ -8,6 +8,7 @@ const saltOrRounds = 10;
 
 
 // in register
+// whats your gard?
 @Injectable()
 export class AuthService {
   constructor(
