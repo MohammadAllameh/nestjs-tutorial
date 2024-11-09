@@ -4,6 +4,9 @@ import { LoginAuthDto } from './dto/login';
 import { UsersService } from 'src/users/users.service';
 
 import * as bcrypt from 'bcrypt';
+
+import { JwtService } from '@nestjs/jwt';
+
 const saltOrRounds = 10;
 
 
@@ -13,7 +16,8 @@ const saltOrRounds = 10;
 export class AuthService {
   constructor(
 
-    private readonly usersService: UsersService
+    private readonly usersService: UsersService,
+    private readonly jwtService: JwtService
   ) { }
   async register(registerAuthDto: RegisterAuthDto) {
     const user = await this.usersService.findUserByEmail(registerAuthDto.email);
@@ -34,6 +38,9 @@ export class AuthService {
     if (!isPasswordMatch) {
       throw new HttpException('Wrong Password', 400)
     }
-
+    const accessToken = this.jwtService.sign({ id: user.id, email: user.email });
+    return {
+      access_token: accessToken
+    }
   }
 }
