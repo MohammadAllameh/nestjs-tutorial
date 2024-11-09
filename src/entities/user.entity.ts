@@ -18,6 +18,6 @@ export default class UsersEntity {
     @Column({ nullable: true })
     age: number
 
-    @Column({ select: false, nullable: false })
+    @Column({ nullable: false })
     password: string
 }

@@ -18,14 +18,22 @@ export class AuthService {
   async register(registerAuthDto: RegisterAuthDto) {
     const user = await this.usersService.findUserByEmail(registerAuthDto.email);
     if (user) {
-      console.log(user)
       throw new HttpException('User already exists', 400)
     }
     // registerAuthDto.password = await bycrypt.hash(registerAuthDto.password, 10)
     registerAuthDto.password = await bcrypt.hash(registerAuthDto.password, saltOrRounds);
     return await this.usersService.create(registerAuthDto)
   }
-  login(loginAuthDto: LoginAuthDto) {
-    return 'This action adds a new auth';
+
+  async login(loginAuthDto: LoginAuthDto) {
+    const user = await this.usersService.findUserByEmail(loginAuthDto.email);
+    if (!user) {
+      throw new HttpException('User not found', 400)
+    }
+    const isPasswordMatch = await bcrypt.compare(loginAuthDto.password, user.password);
+    if (!isPasswordMatch) {
+      throw new HttpException('Wrong Password', 400)
+    }
+
   }
 }
