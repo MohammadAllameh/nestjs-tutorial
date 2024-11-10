@@ -8,14 +8,14 @@ import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './strategies/jwt.strategy';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([UsersEntity]),
-    JwtModule.register({
-      secret: 'sdfsdWI@$U828429834JDLAF&!!*#$(!)#%&!#$^^!@#*!(#R&!*(#$*&(!#*$&(*',
-      signOptions: { expiresIn: '1d' },
-    }),
-  ],
-  controllers: [AuthController],
-  providers: [AuthService, UsersService, JwtStrategy],
+    imports: [
+        TypeOrmModule.forFeature([UsersEntity]),
+        JwtModule.register({
+            secret: 'sdfsdWI@$U828429834JDLAF&!!*#$(!)#%&!#$^^!@#*!(#R&!*(#$*&(!#*$&(*',
+            signOptions: { expiresIn: '1d' },
+        }),
+    ],
+    controllers: [AuthController],
+    providers: [AuthService, UsersService, JwtStrategy],
 })
-export class AuthModule { }
+export class AuthModule {}

@@ -5,8 +5,8 @@ import { UsersService } from 'src/users/users.service';
 import { UsersModule } from 'src/users/users.module';
 
 @Module({
-  imports: [UsersModule],
-  controllers: [ProductsController],
-  providers: [ProductsService, UsersService],
+    imports: [UsersModule],
+    controllers: [ProductsController],
+    providers: [ProductsService, UsersService],
 })
-export class ProductsModule { }
+export class ProductsModule {}

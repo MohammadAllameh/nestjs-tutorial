@@ -2,6 +2,6 @@ export class RegisterAuthDto {
     email: string;
     firstname: string;
     lastname: string;
-    age: number
+    age: number;
     password: string;
 }

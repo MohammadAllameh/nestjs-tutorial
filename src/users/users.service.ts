@@ -6,12 +6,12 @@ import { CreateUserDto } from './dto/createUser.dto';
 
 @Injectable()
 export class UsersService {
-    constructor(@InjectRepository(UsersEntity) private readonly usersRepository: Repository<UsersEntity>) {
-
-    }
+    constructor(
+        @InjectRepository(UsersEntity)
+        private readonly usersRepository: Repository<UsersEntity>,
+    ) {}
 
     async findAll() {
-
         return await this.usersRepository.find();
     }
     async findUserByEmail(email: string) {
