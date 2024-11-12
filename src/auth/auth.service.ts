@@ -16,12 +16,13 @@ export class AuthService {
     constructor(
         private readonly usersService: UsersService,
         private readonly jwtService: JwtService,
-    ) {}
+    ) { }
     async register(registerAuthDto: RegisterAuthDto) {
         const user = await this.usersService.findUserByEmail(
             registerAuthDto.email,
         );
         if (user) {
+            console.log(user)
             throw new HttpException('User already exists', 400);
         }
         // registerAuthDto.password = await bycrypt.hash(registerAuthDto.password, 10)

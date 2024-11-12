@@ -5,6 +5,7 @@ import {
     IsOptional,
     MinLength,
 } from 'class-validator';
+import userGuard from 'src/users/dto/userGuard.dto';
 
 export class CreateProductDto {
     @IsString()
@@ -19,4 +20,7 @@ export class CreateProductDto {
     @IsNumber()
     @IsOptional()
     readonly price: number;
+
+    @IsOptional()
+    user: userGuard
 }
