@@ -8,7 +8,7 @@ import * as passport from 'passport';
 import * as session from 'express-session';
 
 import { ValidationPipe } from '@nestjs/common';
-
+// add type For Test
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
     app.useGlobalPipes(
