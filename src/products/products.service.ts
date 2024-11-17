@@ -22,7 +22,7 @@ export class ProductsService {
 
     async findAll() {
         return await this.product_repository.find(
-            //     {/
+            //     {///2
             //     relations: {
             //         user: true
             //     }
