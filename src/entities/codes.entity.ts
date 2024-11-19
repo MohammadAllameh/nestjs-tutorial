@@ -1,4 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+    Column,
+    CreateDateColumn,
+    Entity,
+    PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('codes')
 export default class CodesEntity {
@@ -12,5 +17,8 @@ export default class CodesEntity {
     code: number;
 
     @Column({ nullable: true, default: false })
-    is_used: boolean
+    is_used: boolean;
+
+    @CreateDateColumn({ type: 'timestamp' })
+    created_at: Date;
 }

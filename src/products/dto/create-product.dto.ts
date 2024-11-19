@@ -22,5 +22,5 @@ export class CreateProductDto {
     readonly price: number;
 
     @IsOptional()
-    user: userGuard
+    user: userGuard;
 }

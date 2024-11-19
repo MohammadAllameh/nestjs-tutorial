@@ -19,7 +19,7 @@ import userGuard from 'src/users/dto/userGuard.dto';
 
 @Controller('products')
 export class ProductsController {
-    constructor(private readonly productsService: ProductsService) { }
+    constructor(private readonly productsService: ProductsService) {}
 
     @Post()
     @UseGuards(JwtAuthGuard)
@@ -27,7 +27,7 @@ export class ProductsController {
         const user: userGuard = req.user;
         createProductDto.user = user;
         // return this.productsService.create(createProductDto);
-        return this.productsService.create(createProductDto)
+        return this.productsService.create(createProductDto);
     }
 
     @Get()
@@ -37,16 +37,20 @@ export class ProductsController {
 
     @Get(':id')
     findOne(@Param('id') id: number) {
-        return this.productsService.findOne(id)
+        return this.productsService.findOne(id);
     }
 
     @Put(':id')
     @UseGuards(JwtAuthGuard)
-    update(@Param('id') id: number, @Body() updateProductDto: UpdateProductDto, @Request() req) {
+    update(
+        @Param('id') id: number,
+        @Body() updateProductDto: UpdateProductDto,
+        @Request() req,
+    ) {
         const user: userGuard = req.user;
         updateProductDto.user = user;
         // return this.productsService.update(+id, updateProductDto);
-        return this.productsService.update(id, updateProductDto)
+        return this.productsService.update(id, updateProductDto);
     }
 
     @Delete(':id')
