@@ -10,12 +10,14 @@ import {
     Put,
     UseGuards,
     Request,
+    HttpException,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { JwtAuthGuard } from 'src/jwt-auth/jwt-auth.guard';
 import userGuard from 'src/users/dto/userGuard.dto';
+import { I18n, I18nContext } from 'nestjs-i18n';
 
 @Controller('products')
 export class ProductsController {
@@ -31,8 +33,13 @@ export class ProductsController {
     }
 
     @Get()
-    findAll() {
-        return this.productsService.findAll();
+    findAll(@I18n() i18n: I18nContext) {
+        throw new HttpException(
+            i18n.t('tr.item_not_found', { args: { item: 'username' } }),
+            400,
+        );
+        // return { message: i18n.t('tr.hello') }
+        // return this.productsService.findAll();
     }
 
     @Get(':id')
@@ -57,6 +64,7 @@ export class ProductsController {
     @UseGuards(JwtAuthGuard)
     remove(@Param('id') id: number, @Request() req) {
         const user: userGuard = req.user;
+
         return this.productsService.remove(id, user);
     }
 }

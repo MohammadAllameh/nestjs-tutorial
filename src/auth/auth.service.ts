@@ -9,6 +9,7 @@ import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
 import CodesEntity from 'src/entities/codes.entity';
 import { Repository } from 'typeorm';
+import { MailerService } from '@nestjs-modules/mailer';
 
 const saltOrRounds = 10;
 
@@ -21,21 +22,32 @@ export class AuthService {
         private readonly jwtService: JwtService,
         @InjectRepository(CodesEntity)
         private readonly codesRepository: Repository<CodesEntity>,
-    ) { }
+        private readonly mailerService: MailerService,
+    ) {}
     async register(registerAuthDto: RegisterAuthDto) {
-        const user = await this.usersService.findUserByEmail(
-            registerAuthDto.email,
-        );
-        if (user) {
-            console.log(user);
-            throw new HttpException('User already exists', 400);
-        }
-        // registerAuthDto.password = await bycrypt.hash(registerAuthDto.password, 10)
-        registerAuthDto.password = await bcrypt.hash(
-            registerAuthDto.password,
-            saltOrRounds,
-        );
-        return await this.usersService.create(registerAuthDto);
+        // const user = await this.usersService.findUserByEmail(
+        //     registerAuthDto.email,
+        // );
+        // if (user) {
+        //     console.log(user);
+        //     throw new HttpException('User already exists', 400);
+        // }
+        // // registerAuthDto.password = await bycrypt.hash(registerAuthDto.password, 10)
+        // registerAuthDto.password = await bcrypt.hash(
+        //     registerAuthDto.password,
+        //     saltOrRounds,
+        // );
+        this.mailerService
+            .sendMail({
+                html: '<h1>hello</h1>',
+                text: 'hello',
+                subject: 'Welcome',
+                to: registerAuthDto.email,
+            })
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+        return { message: 'good' };
+        // return await this.usersService.create(registerAuthDto);
     }
     // add localain
     async login(loginAuthDto: LoginAuthDto) {
