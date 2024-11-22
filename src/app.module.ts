@@ -37,10 +37,12 @@ dotenv.config();
                 from: `welcom to <${process.env.EMAIL_USERNAME}>`,
             },
             template: {
-                dir: __dirname + '/templates',
+                // dir: __dirname + '/templates',
+                dir: process.cwd() + '/templates/',
                 adapter: new EjsAdapter(),
                 options: {
                     strict: true,
+                    // debug: true
                 },
             },
         }),
