@@ -23,7 +23,7 @@ export class AuthService {
         @InjectRepository(CodesEntity)
         private readonly codesRepository: Repository<CodesEntity>,
         private readonly mailerService: MailerService,
-    ) { }
+    ) {}
     async register(registerAuthDto: RegisterAuthDto) {
         // const user = await this.usersService.findUserByEmail(
         //     registerAuthDto.email,
@@ -38,25 +38,24 @@ export class AuthService {
         //     saltOrRounds,
         // );
         setImmediate(async () => {
-            await this.mailerService
-                .sendMail({
-                    template: 'welcome.html',
-                    text: 'hello',
-                    subject: 'Welcome',
-                    to: registerAuthDto.email,
-                    // attachments: [
-                    //     {
-                    //         filename: 'logo.png',
-                    //         path: 'https://yourwebsite.com/logo.png',
-                    //         cid: 'logo'
-                    //     }
-                    // ]
-                    // context: {
-                    //     name: registerAuthDto.firstname,
-                    //     family: registerAuthDto.lastname
-                    // }
-                })
-        })
+            await this.mailerService.sendMail({
+                template: 'welcome.html',
+                text: 'hello',
+                subject: 'Welcome',
+                to: registerAuthDto.email,
+                // attachments: [
+                //     {
+                //         filename: 'logo.png',
+                //         path: 'https://yourwebsite.com/logo.png',
+                //         cid: 'logo'
+                //     }
+                // ]
+                // context: {
+                //     name: registerAuthDto.firstname,
+                //     family: registerAuthDto.lastname
+                // }
+            });
+        });
         // .then((res) => console.log(res))
         // .catch((err) => console.log(err));
         return { message: 'good' };

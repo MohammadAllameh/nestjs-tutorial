@@ -8,6 +8,7 @@ import * as passport from 'passport';
 import * as session from 'express-session';
 
 import { ValidationPipe } from '@nestjs/common';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 // add type For Test
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
@@ -25,6 +26,14 @@ async function bootstrap() {
     );
     app.use(passport.initialize());
     app.use(passport.session());
+    const config = new DocumentBuilder()
+        .setTitle('My products site')
+        .setDescription('This is Products api documentation')
+        .setVersion('1.0')
+        .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('docs', app, document);
+
     await app.listen(3000);
     // const app = await NestFactory.create<NestFastifyApplication>(
     //   AppModule,
